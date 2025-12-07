@@ -2,7 +2,7 @@
 #include "define.h"
 #include "stdbool.h"
 
-typedef struct Article {
+typedef struct {
     char article_name[256];
     char author_surname[128];
     char initials[8];
