@@ -1,4 +1,3 @@
-#pragma once
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +9,7 @@ List* initialize_list() {
     list->head = NULL;
     list->tail = NULL;
     list->size = 0;
+    return list;
 }
 
 
@@ -19,7 +19,7 @@ u_int get_size(List* list) {
 
 
 Node* get_by_index(List* list, u_int index) {
-    if (index < 0 || index >= list->size) {
+    if (index >= list->size) {
         return NULL;
     }
 
@@ -54,7 +54,7 @@ Node* get_prev(List* list, Node* node) {
 
 void push_start(List* list, Article* data) {
     Node* new_article = malloc(sizeof(Node));
-    if (!new_article) return NULL;
+    if (!new_article) return;
     new_article->data = *data;
     new_article->next = list->head;
     new_article->prev = NULL;
@@ -72,7 +72,7 @@ void push_start(List* list, Article* data) {
 
 void push_end(List* list, Article* data) {
     Node* new_article = malloc(sizeof(Node));
-    if (!new_article) return NULL;
+    if (!new_article) return;
     new_article->data = *data;
     new_article->next = NULL;
     new_article->prev = list->tail;
@@ -104,7 +104,7 @@ void push_by_index(List* list, Article* data, u_int index) {
     }
 
     Node* new_article = malloc(sizeof(Node));
-    if (!new_article) return NULL;
+    if (!new_article) return;
     new_article->data = *data;
     new_article->next = current;
     new_article->prev = current->prev;
@@ -150,7 +150,7 @@ void pop_end(List* list) {
 
 
 void pop_by_index(List* list, u_int index) {
-    if (index < 0 || index >= list->size) return;
+    if (index >= list->size) return;
     if (index == 0) {
         pop_start(list);
         return;
@@ -169,4 +169,101 @@ void pop_by_index(List* list, u_int index) {
     current->next->prev = current->prev;
     free(current);
     list->size--;
+}
+
+u_int max(u_int a, u_int b) {
+    if (a > b) return a;
+    else return b;
+}
+
+u_int min(u_int a, u_int b) {
+    if (a < b) return a;
+    else return b;
+}
+
+void swap_near(List* list, Node* node1, Node* node2) {
+        if (node1->prev) {
+            node1->prev->next = node2;
+        }
+        else {
+            list->head = node2;
+        }
+
+        if (node2->next) {
+            node2->next->prev = node1;
+        }
+        else {
+            list->tail = node1;
+        }
+
+        node1->next = node2->next;
+        node2->prev = node1->prev;
+        node2->next = node1;
+        node1->prev = node2;
+}
+void swap(List* list, u_int index1, u_int index2) {
+    if (index1 >= list->size || index2 >= list->size || index1 == index2) return;
+
+    Node* node1 = get_by_index(list, min(index1, index2));
+    Node* node2 = get_by_index(list, max(index1, index2));
+    if (node1->next == node2) {
+        swap_near(list, node1, node2);
+        return;
+    }
+    if (node1->prev) {
+        node1->prev->next = node2;
+    }
+    else {
+        list->head = node2;
+    }
+
+    if (node2->next) {
+        node2->next->prev = node1;
+    }
+    else {
+        list->tail = node1;
+    }
+
+    Node* tmp1 = node1->next;
+    Node* tmp2 = node1->prev;
+
+    node1->next = node2->next;
+    node1->prev = node2->prev;
+    node2->next = tmp1;
+    node2->prev = tmp2;
+}
+
+List* array_to_list(Article* array, u_int size) {
+    List* list = initialize_list();
+    for (u_int i = 0; i < size; i++) {
+        push_end(list, &array[i]);
+    }
+    return list;
+}
+
+Article* list_to_array(List* list) {
+    Article* array = malloc(list->size * sizeof(Article));
+    if (!array) return NULL;
+
+    Node* current = list->head;
+    for (u_int i = 0; i < list->size; i++) {
+        array[i] = current->data;
+        current = current->next;
+    }
+    return array;
+}
+
+void clear_list(List* list) {
+    while (list->head) {
+        Node* tmp = list->head;
+        list->head = list->head->next;
+        free(tmp);
+    }
+    list->tail = NULL;
+    list->size = 0;
+}
+
+void free_list(List* list) {
+    clear_list(list);
+    free(list);
 }

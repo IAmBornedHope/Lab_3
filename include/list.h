@@ -55,7 +55,7 @@ Node* get_end(List* list);
  */
 Node* get_next(List* list, Node* node);
 /**
- * @brief Получения предыдущего узла от указателя
+ * @brief Получение предыдущего узла от указателя
  * 
  * @param list 
  * @param node 
@@ -103,3 +103,49 @@ void pop_end(List* list);
  * @param index 
  */
 void pop_by_index(List* list, u_int index);
+
+u_int max(u_int a, u_int b);
+u_int min(u_int a, u_int b);
+
+/**
+ * @brief Обмен двух соседних элементов двусвязного списка
+ * 
+ * @param list 
+ * @param node1 
+ * @param node2 
+ */
+void swap_near(List* list, Node* node1, Node* node2);
+/**
+ * @brief Обмен двух элементов двусвязного списка в общем случае
+ * 
+ * @param list 
+ * @param index1 
+ * @param index2 
+ */
+void swap(List* list, u_int index1, u_int index2);
+/**
+ * @brief Преобразование массива в структуру
+ * 
+ * @param array 
+ * @param size 
+ * @return List* 
+ */
+List* array_to_list(Article* array, u_int size);
+/**
+ * @brief Преобразование структуры в массив
+ * 
+ * @param list 
+ * @return Article* 
+ */
+Article* list_to_array(List* list);
+/**
+ * @brief Удаление всех элементов из списка
+ * 
+ */
+void clear_list(List* list);
+/**
+ * @brief Очистка выделенной под список памяти
+ * 
+ * @param list 
+ */
+void free_list(List* list);
