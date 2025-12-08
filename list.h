@@ -14,12 +14,92 @@ typedef struct {
     u_int size;
 } List;
 
-
 List* initialize_list();
+
+/**
+ * @brief Получение размеров двусвязного списка
+ * 
+ * @param list 
+ * @return u_int 
+ */
 u_int get_size(List* list);
+
+/**
+ * @brief Получение первого элемента по индексу
+ * 
+ * @param list 
+ * @param index 
+ * @return Article* 
+ */
+Node* get_by_index(List* list, u_int index);
+/**
+ * @brief Получение первого узла списка
+ * 
+ * @param list 
+ * @return Node* 
+ */
 Node* get_beginning(List* list);
+/**
+ * @brief Получение последнего узла списка
+ * 
+ * @param list 
+ * @return Node* 
+ */
 Node* get_end(List* list);
+/**
+ * @brief Получение следующего узла от указателя
+ * 
+ * @param list 
+ * @param node 
+ * @return Node* 
+ */
 Node* get_next(List* list, Node* node);
+/**
+ * @brief Получения предыдущего узла от указателя
+ * 
+ * @param list 
+ * @param node 
+ * @return Node* 
+ */
 Node* get_prev(List* list, Node* node);
+/**
+ * @brief Добавление узла в начало списка
+ * 
+ * @param list 
+ * @param data 
+ */
 void push_start(List* list, Article* data);
+/**
+ * @brief Добавление узла в конец списка
+ * 
+ * @param list 
+ * @param data 
+ */
 void push_end(List* list, Article* data);
+/**
+ * @brief Добавление элемента в произвольное место списка по индексу
+ * 
+ * @param list 
+ * @param data 
+ * @param index 
+ */
+void push_by_index(List* list, Article* data, u_int index);
+/**
+ * @brief Удаление первого элемента списка
+ * 
+ * @param list 
+ */
+void pop_start(List* list);
+/**
+ * @brief Удаление последнего элемента списка
+ * 
+ * @param list 
+ */
+void pop_end(List* list);
+/**
+ * @brief Удаление произвольного элемента списка по индексу
+ * 
+ * @param list 
+ * @param index 
+ */
+void pop_by_index(List* list, u_int index);

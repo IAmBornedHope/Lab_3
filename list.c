@@ -1,12 +1,9 @@
 #pragma once
 #include "list.h"
 #include <stdlib.h>
+#include <string.h>
 
-/**
- * @brief Инициализация двусвязного списка
- * 
- * @return List* 
- */
+
 List* initialize_list() {
     List* list = malloc(sizeof(List));
     if (!list) return NULL;
@@ -15,24 +12,13 @@ List* initialize_list() {
     list->size = 0;
 }
 
-/**
- * @brief Получение количества статей в списке
- * 
- * @param list 
- * @return u_int 
- */
+
 u_int get_size(List* list) {
     return list->size;
 }
 
-/**
- * @brief Получение адреса элемента списка по индексу
- * 
- * @param list 
- * @param index 
- * @return Article* 
- */
-Article* get_by_index(List* list, u_int index) {
+
+Node* get_by_index(List* list, u_int index) {
     if (index < 0 || index >= list->size) {
         return NULL;
     }
@@ -42,59 +28,30 @@ Article* get_by_index(List* list, u_int index) {
     for (u_int i = 0; i < index; i++) {
         current = current->next;
     }
-    return &(current->data);
+    return current;
 }
 
 
-/**
- * @brief Получение первого узла списка
- * 
- * @param list 
- * @return Node* 
- */
 Node* get_beginning(List* list) {
     return list->head;
 }
 
-/**
- * @brief Получение последнего узла списка
- * 
- * @param list 
- * @return Node* 
- */
+
 Node* get_end(List* list) {
     return list->tail;
 }
 
-/**
- * @brief Получение следующего узла списка после заданного указателя
- * 
- * @param list 
- * @param node 
- * @return Node* 
- */
+
 Node* get_next(List* list, Node* node) {
     return node->next;
 }
 
-/**
- * @brief Получение предыдущего узла списка перед заданным указателем
- * 
- * @param list 
- * @param node 
- * @return Node* 
- */
+
 Node* get_prev(List* list, Node* node) {
     return node->prev;
 }
 
 
-/**
- * @brief Добавление элемента в начало списка
- * 
- * @param list 
- * @param data 
- */
 void push_start(List* list, Article* data) {
     Node* new_article = malloc(sizeof(Node));
     if (!new_article) return NULL;
@@ -112,12 +69,7 @@ void push_start(List* list, Article* data) {
     list->size++;
 }
 
-/**
- * @brief Добавление элемента в конец списка
- * 
- * @param list 
- * @param data 
- */
+
 void push_end(List* list, Article* data) {
     Node* new_article = malloc(sizeof(Node));
     if (!new_article) return NULL;
@@ -135,17 +87,86 @@ void push_end(List* list, Article* data) {
     list->size++;
 }
 
-//
-// void push_by_index(List* list, Article* data, u_int index) {
-//     if (index == 0) {
-//         push_start(list, data);
-//         return;
-//     }
-//     if (index == list->size) {
-//         push_end(list, data);
-//         return;
-//     }
+
+void push_by_index(List* list, Article* data, u_int index) {
+    if (index == 0) {
+        push_start(list, data);
+        return;
+    }
+    if (index == list->size) {
+        push_end(list, data);
+        return;
+    }
+
+    Node* current = list->head;
+    for (u_int i = 0; i < index; i++) {
+        current = current->next;
+    }
+
+    Node* new_article = malloc(sizeof(Node));
+    if (!new_article) return NULL;
+    new_article->data = *data;
+    new_article->next = current;
+    new_article->prev = current->prev;
+    current->prev->next = new_article;
+    current->prev = new_article;
+    list->size++;
+
+}
 
 
+void pop_start(List* list) {
+    if (!list->head) return;
+    Node* tmp = list->head;
+    list->head = list->head->next;
 
-// }
+    if (list->head) {
+        list->head->prev = NULL;
+    }
+    else {      
+        list->tail = NULL;
+    }
+
+    free(tmp);
+    list->size--;
+}
+
+
+void pop_end(List* list) {
+    if (!list->tail) return;
+    Node* tmp = list->tail;
+    list->tail = list->tail->prev;
+
+    if (list->tail) {
+        list->tail->next = NULL;
+    }
+    else {
+        list->head = NULL;
+    }
+
+    free(tmp);
+    list->size--;
+}
+
+
+void pop_by_index(List* list, u_int index) {
+    if (index < 0 || index >= list->size) return;
+    if (index == 0) {
+        pop_start(list);
+        return;
+    }
+    if (index == list->size-1) {
+        pop_end(list);
+        return;
+    }
+    
+    Node* current = list->head;
+    for (u_int i = 0; i < index; i++) {
+        current = current->next;
+    }
+    
+    current->prev->next = current->next;
+    current->next->prev = current->prev;
+    free(current);
+    list->size--;
+}
