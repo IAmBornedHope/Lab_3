@@ -2,7 +2,7 @@
 #include "compare.h"
 #include "list.h"
 
-void bubble_sort(List* list, int (*compare_articles)(const Article*, const Article*)) {
+void bubble_sort(List* list, int (*compare_articles)(const Article*, const Article*), bool direction) {
     if (list->size <= 1) return;
     bool swapped;
 
@@ -13,10 +13,21 @@ void bubble_sort(List* list, int (*compare_articles)(const Article*, const Artic
             Node* second = get_by_index(list, j + 1);
 
             int result = compare_articles(&(first->data), &(second->data));
-            if (result > 0) {
-                swap_near(list, first, second);
-                swapped = true;
+
+            if (direction) {
+                if (result > 0) {
+                    swap_near(list, first, second);
+                    swapped = true;
+                }
             }
+            else {
+                if (result < 0) {
+                    swap_near(list, first, second);
+                    swapped = true;
+                }
+            }
+
+
         }
         if (!swapped) break;
     }
