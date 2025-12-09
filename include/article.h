@@ -11,5 +11,5 @@ typedef struct {
     u_int book;
     bool rinc;
     u_int pages;
-    u_int quotes;
+    u_int citations;
 } Article;

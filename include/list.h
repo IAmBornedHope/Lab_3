@@ -14,6 +14,11 @@ typedef struct {
     u_int size;
 } List;
 
+/**
+ * @brief Инициализация двусвязного списка
+ * 
+ * @return List* 
+ */
 List* initialize_list();
 
 /**
@@ -62,6 +67,14 @@ Node* get_next(List* list, Node* node);
  * @return Node* 
  */
 Node* get_prev(List* list, Node* node);
+/**
+ * @brief Получение статьи из узла по индексу узла
+ * 
+ * @param list 
+ * @param index 
+ * @return Article* 
+ */
+Article* get_data(List* list, u_int index);
 /**
  * @brief Добавление узла в начало списка
  * 

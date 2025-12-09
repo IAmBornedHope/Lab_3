@@ -23,12 +23,21 @@ Node* get_by_index(List* list, u_int index) {
         return NULL;
     }
 
-    Node* current = list->head;
+    if (index <= (list->size / 2)) {
+        Node* current = list->head;
 
-    for (u_int i = 0; i < index; i++) {
-        current = current->next;
+        for (u_int i = 0; i < index; i++) {
+            current = current->next;
+        }
+        return current;
     }
-    return current;
+    else {
+        Node* current = list->tail;
+        for (u_int i = list->size - 1; i > index; i--) {
+            current = current->prev;
+        }
+        return current;
+    }
 }
 
 
@@ -49,6 +58,14 @@ Node* get_next(List* list, Node* node) {
 
 Node* get_prev(List* list, Node* node) {
     return node->prev;
+}
+
+Article* get_data(List* list, u_int index) {
+    Node* node = get_by_index(list, index);
+    if (node) {
+        return &(node->data);
+    }
+    else return NULL;
 }
 
 
@@ -210,6 +227,10 @@ void swap(List* list, u_int index1, u_int index2) {
         swap_near(list, node1, node2);
         return;
     }
+
+    node1->next->prev = node2;
+    node2->prev->next = node1;
+
     if (node1->prev) {
         node1->prev->next = node2;
     }
@@ -223,6 +244,7 @@ void swap(List* list, u_int index1, u_int index2) {
     else {
         list->tail = node1;
     }
+
 
     Node* tmp1 = node1->next;
     Node* tmp2 = node1->prev;
