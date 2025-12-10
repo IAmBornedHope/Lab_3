@@ -1,4 +1,5 @@
 #include "inout.h"
+#include "define.h"
 #include "article.h"
 #include <stdio.h>
 #include <string.h>

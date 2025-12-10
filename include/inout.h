@@ -15,3 +15,4 @@
  */
 void print_csv(List* list, FILE* output_file);
 void print_table(List* list, FILE* output_file);
+void input_csv(List* list, const char* filename);
