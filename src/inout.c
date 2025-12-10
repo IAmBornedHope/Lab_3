@@ -7,31 +7,59 @@
 #include <stdlib.h>
 
 void print_csv(List* list, FILE* output_file) {
+    fprintf(output_file, "%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "ARTICLE NAME", "AUTHOR_SURNAME",
+    "AUTHOR_INITIALS", "JOURNAL_NAME", "YEAR", "BOOK NO", "PAGES", "CITATIONS");
     Node* current = list->head;
     while (current) {
-        fprintf(output_file, "%s,%s,%s,%s,%u,%u,%d,%u,%u\n",
+        fprintf(output_file, "%s,%s,%s,%s,%u,%u,%s,%u,%u\n",
             current->data.article_name,
             current->data.author_surname,
             current->data.initials,
             current->data.journal_name,
             current->data.year,
             current->data.book,
-            current->data.rinc,
+            current->data.rinc  ? "YES" : "NO",
             current->data.pages,
             current->data.citations);
         current = current->next;
     }
 }
 
-List* input_csv(const char* filename) {
+void print_table(List* list, FILE* output_file) {
+    fprintf(output_file, "%-20.20s %-15.15s %-10.10s %-20.20s %-12.12s %-12.12s %-12.12s %-12.12s %-16.16s\n",
+            "|Name|", "|Author|", "|Initials|", "|Journal|", "|Year|", "|Book No|", "|RINC|", "|Pages|", "|Citations|");
+    fprintf(output_file, "%s%s\n",
+            "---------------------------------------------------------------------",
+            "--------------------------------------------------------------------------------\n");
+
+    Node* current = list->head;
+    while (current) {
+        fprintf(output_file, "%-22.22s %-15.15s %-10.10s %-19.19s %-12d %-12d %-12.12s %-14d %-16d\n",
+                current->data.article_name,
+                current->data.author_surname,
+                current->data.initials,
+                current->data.journal_name,
+                current->data.year,
+                current->data.book,
+                current->data.rinc ? "YES" : "NO",
+                current->data.pages,
+                current->data.citations);
+        current = current->next;
+        fprintf(output_file, "%s%s\n",
+            "---------------------------------------------------------------------",
+            "--------------------------------------------------------------------------------\n");
+        }
+}
+
+List* input_csv(const char* input_file) {
     FILE* source = NULL;
     char buf[1024];
     List* list = initialize_list();
     if (!list) return NULL;
 
 
-    if (filename) {
-        source = fopen(filename, "r");
+    if (input_file) {
+        source = fopen(input_file, "r");
         if (!source) {
             puts("Не удалось открыть файл");
             free_list(list);
@@ -71,7 +99,7 @@ List* input_csv(const char* filename) {
 
         push_end(list, &note);
     }
-    if (filename) fclose(source);
+    if (input_file) fclose(source);
     return list;
 }
 

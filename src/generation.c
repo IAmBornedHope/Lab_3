@@ -5,41 +5,41 @@
 #include <time.h>
 
 static const char* article_names[] = {
-    "Алгебраические структуры в нейросетях",
-    "Этика машинного обучения",
-    "БДЗ по дискретной математике",
-    "Работа с памятью",
-    "Безопасность Госуслуг",
-    "Разоблачение мессенджера Мах",
-    "Матанализ в информатике",
-    "Псевдорандомные числа",
-    "Построение графов",
-    "Работа трехадресной ЭВМ"
+    "Algebraic Structures in Neural Networks",
+    "Ethics of Machine Learning",
+    "Homework on Discrete Mathematics",
+    "Working with Memory",
+    "Security of Gosuslugi (State Services)",
+    "Exposing the Makh Messenger",
+    "Mathematical Analysis in Computer Science",
+    "Pseudorandom Numbers",
+    "Graph Construction",
+    "Operation of a Three-Address Computer"
 };
 
 static const char* author_surnames[] = {
-    "Иванов", "Петров", "Сидоров", "Новиков", "Смирнов", "Александров",
-    "Михайлов", "Беляцкий", "Мирчу", "Лисенков", "Шавалиев", "Булгакова",
-    "Макаров", "Орлова", "Петропавловская", "Коврова", "Медведев", "Криворучко"
+    "Ivanov", "Petrov", "Sidorov", "Novikov", "Smirnov", "Aleksandrov",
+    "Mikhailov", "Belyatsky", "Mirchu", "Lisenkov", "Shavaliyev", "Bulgakova",
+    "Makarov", "Orlova", "Petropavlovskaya", "Kovrova", "Medvedev", "Krivoruchko"
 };
 
 static const char* initials_list[] = {
-    "А.Б.", "У.Е.", "В.Г.", "С.С.", "Г.Н.", "М.А.",
-    "У.Ф.", "Я.Я.", "А.З.", "Л.А.", "А.Л.", "А.С.",
-    "И.И.", "И.М.", "С.Т.", "Н.А.", "О.О.", "О.Ш." 
+    "A.B.", "U.E.", "V.G.", "S.S.", "G.N.", "M.A.",
+    "U.F.", "Y.Y.", "A.Z.", "L.A.", "A.L.", "A.S.",
+    "I.I.", "I.M.", "S.T.", "N.A.", "O.O.", "O.Sh."
 };
 
 static const char* journals[] = {
-    "Архивы ПМИ",
-    "Галилео",
-    "Разрушители мифов",
-    "ЭВМ за ночь",
-    "Матанализ для чайников",
-    "Питон за час",
-    "Все о Си"
-    "В мире животных",
-    "Умный журнал",
-    "Журнал ИИ"
+    "Archives of PMI",
+    "Galileo",
+    "MythBusters",
+    "Computers Overnight",
+    "Calculus for Dummies",
+    "Python in an Hour",
+    "All About C",
+    "In the World of Animals",
+    "Smart Journal",
+    "AI Journal"
 };
 
 List* generate_articles(u_int count) {
