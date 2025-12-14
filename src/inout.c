@@ -30,11 +30,11 @@ void print_table(List* list, FILE* output_file) {
             "|Name|", "|Author|", "|Initials|", "|Journal|", "|Year|", "|Book No|", "|RINC|", "|Pages|", "|Citations|");
     fprintf(output_file, "%s%s\n",
             "---------------------------------------------------------------------",
-            "--------------------------------------------------------------------------------\n");
+            "-------------------------------------------------------------------------------\n");
 
     Node* current = list->head;
     while (current) {
-        fprintf(output_file, "%-22.22s %-15.15s %-10.10s %-19.19s %-12d %-12d %-12.12s %-14d %-16d\n",
+        fprintf(output_file, "%-20.20s...  %-15.15s %-10.10s %-19.19s %-12d %-12d %-12.12s %-14d %-16d\n",
                 current->data.article_name,
                 current->data.author_surname,
                 current->data.initials,
@@ -47,7 +47,7 @@ void print_table(List* list, FILE* output_file) {
         current = current->next;
         fprintf(output_file, "%s%s\n",
             "---------------------------------------------------------------------",
-            "--------------------------------------------------------------------------------\n");
+            "----------------------------------------------------------------------------\n");
         }
 }
 
