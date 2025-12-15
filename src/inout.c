@@ -51,7 +51,7 @@ void print_table(List* list, FILE* output_file) {
         }
 }
 
-List* input_csv(const char* input_file) {
+List* input_csv(char* input_file) {
     FILE* source = NULL;
     char buf[1024];
     List* list = initialize_list();
@@ -81,11 +81,6 @@ List* input_csv(const char* input_file) {
         int result = sscanf(buf, "%255[^,],%127[^,],%24[^,],%255[^,],%u,%u,%u,%u,%u",
             note.article_name, note.author_surname, note.initials, note.journal_name,
             &note.year, &note.book, &rinc_digit, &note.pages, &note.citations);
-
-        if (result != 9) {
-            puts("Неверное количество аргументов. Данная строка будет пропущена.");
-            continue;
-        }
 
         if (note.year < 1000 || note.year > 9999) {
             puts("Год не может быть не четырехзначным. Данная строка будет пропущена.");

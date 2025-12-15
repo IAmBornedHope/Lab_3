@@ -24,4 +24,4 @@ void print_table(List* list, FILE* output_file);
  * @param input_file 
  * @return List* 
  */
-List* input_csv(const char* input_file);
+List* input_csv(char* input_file);

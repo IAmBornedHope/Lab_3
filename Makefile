@@ -4,7 +4,7 @@ TARGET = bin\lab3.exe
 SRCDIR = src
 OBJDIR = build
 
-SRC = list.c sort.c compare.c inout.c generation.c main.c
+SRC = list.c sort.c compare.c inout.c generation.c args.c main.c
 
 OBJ = $(SRC:%.c=%.o)
 OBJS = $(OBJ:%=$(OBJDIR)/%) 
