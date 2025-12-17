@@ -8,7 +8,7 @@
 
 void print_csv(List* list, FILE* output_file) {
     fprintf(output_file, "%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "ARTICLE NAME", "AUTHOR_SURNAME",
-    "AUTHOR_INITIALS", "JOURNAL_NAME", "YEAR", "BOOK NO", "PAGES", "CITATIONS");
+    "AUTHOR_INITIALS", "JOURNAL_NAME", "YEAR", "BOOK NO", "RINC", "PAGES", "CITATIONS");
     Node* current = list->head;
     while (current) {
         fprintf(output_file, "%s,%s,%s,%s,%u,%u,%s,%u,%u\n",
@@ -26,7 +26,7 @@ void print_csv(List* list, FILE* output_file) {
 }
 
 void print_table(List* list, FILE* output_file) {
-    fprintf(output_file, "%-20.20s %-15.15s %-10.10s %-20.20s %-12.12s %-12.12s %-12.12s %-12.12s %-16.16s\n",
+    fprintf(output_file, "%-23s  %-16s %-15s %-20s %-12s %-12s %-12s %-12s %-16s\n",
             "|Name|", "|Author|", "|Initials|", "|Journal|", "|Year|", "|Book No|", "|RINC|", "|Pages|", "|Citations|");
     fprintf(output_file, "%s%s\n",
             "---------------------------------------------------------------------",
@@ -34,7 +34,7 @@ void print_table(List* list, FILE* output_file) {
 
     Node* current = list->head;
     while (current) {
-        fprintf(output_file, "%-20.20s...  %-15.15s %-10.10s %-19.19s %-12d %-12d %-12.12s %-14d %-16d\n",
+        fprintf(output_file, "%-20.20s...  %-15.15s   %-13.13s  %-19.19s   %-12d   %-10d  %-12.12s %-14d %-16d\n",
                 current->data.article_name,
                 current->data.author_surname,
                 current->data.initials,
@@ -82,8 +82,8 @@ List* input_csv(char* input_file) {
             note.article_name, note.author_surname, note.initials, note.journal_name,
             &note.year, &note.book, &rinc_digit, &note.pages, &note.citations);
 
-        if (note.year < 1000 || note.year > 9999) {
-            puts("Год не может быть не четырехзначным. Данная строка будет пропущена.");
+        if (note.year < 1000 || note.year > 2025) {
+            puts("Введен недопустимый год. Данная строка будет пропущена.");
             continue;
         }
 
