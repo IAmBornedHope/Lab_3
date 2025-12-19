@@ -34,7 +34,7 @@ void print_table(List* list, FILE* output_file) {
 
     Node* current = list->head;
     while (current) {
-        fprintf(output_file, "%-20.20s...  %-15.15s   %-13.13s  %-19.19s   %-12d   %-10d  %-12.12s %-14d %-16d\n",
+        fprintf(output_file, "%-20.20s...  %-15.15s   %-13.13s  %-19.19s  %-12d   %-10d  %-12.12s  %-13d%-16d\n",
                 current->data.article_name,
                 current->data.author_surname,
                 current->data.initials,
@@ -69,8 +69,6 @@ List* input_csv(char* input_file) {
     else {
         source = stdin;
     }
-
-    fgets(buf, sizeof(buf), source);
 
     while (fgets(buf, sizeof(buf), source)) {
         Article note;

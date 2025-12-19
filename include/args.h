@@ -6,7 +6,7 @@
 #include "define.h"
 
 typedef struct _Args{
-    u_int num;
+    int num;
     bool help;
     bool generation;
     bool input;

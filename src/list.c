@@ -18,7 +18,7 @@ u_int get_size(List* list) {
 }
 
 
-Node* get_by_index(List* list, u_int index) {
+Node* get_at(List* list, u_int index) {
     if (index >= list->size) {
         return NULL;
     }
@@ -38,6 +38,16 @@ Node* get_by_index(List* list, u_int index) {
         }
         return current;
     }
+}
+
+Node* split_list(Node* start, u_int middle) {
+    for (u_int i = 0; i < middle - 1; i++) {
+        start = start->next;
+    }
+    Node* second = start->next;
+    second->prev = NULL;
+    start->next = NULL;
+    return second;
 }
 
 
@@ -61,7 +71,7 @@ Node* get_prev(List* list, Node* node) {
 }
 
 Article* get_data(List* list, u_int index) {
-    Node* node = get_by_index(list, index);
+    Node* node = get_at(list, index);
     if (node) {
         return &(node->data);
     }
@@ -221,8 +231,8 @@ void swap_near(List* list, Node* node1, Node* node2) {
 void swap(List* list, u_int index1, u_int index2) {
     if (index1 >= list->size || index2 >= list->size || index1 == index2) return;
 
-    Node* node1 = get_by_index(list, min(index1, index2));
-    Node* node2 = get_by_index(list, max(index1, index2));
+    Node* node1 = get_at(list, min(index1, index2));
+    Node* node2 = get_at(list, max(index1, index2));
     if (node1->next == node2) {
         swap_near(list, node1, node2);
         return;

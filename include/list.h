@@ -36,7 +36,7 @@ u_int get_size(List* list);
  * @param index 
  * @return Article* 
  */
-Node* get_by_index(List* list, u_int index);
+Node* get_at(List* list, u_int index);
 /**
  * @brief Получение первого узла списка
  * 
@@ -44,6 +44,14 @@ Node* get_by_index(List* list, u_int index);
  * @return Node* 
  */
 Node* get_beginning(List* list);
+/**
+ * @brief Разделение списка на две части по индексу
+ * 
+ * @param start 
+ * @param middle 
+ * @return Node* 
+ */
+Node* split_list(Node* start, u_int middle);
 /**
  * @brief Получение последнего узла списка
  * 

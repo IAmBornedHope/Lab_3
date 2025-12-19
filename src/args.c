@@ -1,12 +1,12 @@
 #include "args.h"
 
 void print_help() {
-    puts("-h, --help Показать меню информации");
-    puts("-g, --generate==N Сгенерировать N случайных научных статей");
-    puts("-s, --sort Отсортировать список");
-    puts("-t, --type (asc/desc/A/D) Выбор режима сортировки ");
-    puts("-o, --out= data.csv Вывод в файл/поток stdout");
-    puts("-i, --in data.csv Ввод из файла/потока stdin");
+    puts("-h --help Показать меню информации");
+    puts("-g --generate=N Сгенерировать N случайных научных статей");
+    puts("-s --sort Отсортировать список");
+    puts("-t --type (asc/desc/A/D) Выбор режима сортировки ");
+    puts("-o --out= data.csv Вывод в файл/поток stdout");
+    puts("-i --in= data.csv Ввод из файла/потока stdin");
     puts("-p --print Вывод в виде таблицы");
 }
 
@@ -21,9 +21,18 @@ int parse_args(int argc, char* argv[], Args* args) {
     args->out_file = "";
     args->input_file = NULL;
     args->num = 0;
+    if (argc == 1) {
+        args->help = true;
+        return 1;
+    }
 
     for (u_int i = 1; i < argc; ++i) {
         char* arg = argv[i];
+
+        if (strcmp(arg, "-") == 0 || strcmp(arg, "--") == 0) {
+            fprintf(stderr, "INVALID FLAG\n");
+            return -1;
+        }
         if (strcmp(arg, "-h") == 0 || strcmp(arg, "--help") == 0) {
             args->help = true;
         }
@@ -43,7 +52,9 @@ int parse_args(int argc, char* argv[], Args* args) {
                 value = argv[++i];
             }
             else {
-                fprintf(stderr, "INVALID FLAG");
+                fprintf(stderr, "INVALID FLAG\n");
+                args->output = false;
+                args->sort = false;
                 return 0;
             }
             args->out_file = value;
@@ -57,7 +68,8 @@ int parse_args(int argc, char* argv[], Args* args) {
                 value = argv[++i];
             }
             else {
-                fprintf(stderr, "INVALID FLAG");
+                fprintf(stderr, "INVALID FLAG\n");
+                args->sort = false;
                 return 0;
             }
             args->flag = strdup(value);
@@ -72,7 +84,13 @@ int parse_args(int argc, char* argv[], Args* args) {
             else if (strncmp(arg, "-i", 2) == 0 && i + 1 < argc) {
                 value = argv[++i];
             }
+            else {
+                fprintf(stderr, "INVALID FLAG\n");
+                args->sort = false;
+                return 0;
+            }
             args->input_file = strdup(value);
+
 
         }
         else if (strncmp(arg, "-g", 2) == 0 || strncmp(arg, "--generate", 10) == 0) {
@@ -85,10 +103,15 @@ int parse_args(int argc, char* argv[], Args* args) {
                 value = argv[++i];
             }
             else {
-            fprintf(stderr, "INVALID FLAG");
+            fprintf(stderr, "INVALID FLAG\n");
             return 0;
             }
             args->num = atoi(value);
+            if (args->num < 0) {
+                fprintf(stderr, "INCORRECT N\n");
+                args->generation = false;
+                return 0;
+            }
     }
 }
 }
