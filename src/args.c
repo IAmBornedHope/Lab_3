@@ -4,10 +4,10 @@ void print_help() {
     printf("%-30s %s\n", "-h --help", "Show this menu");
     printf("%-30s %s\n", "-g --generate=N", "Generate N random scientific articles");
     printf("%-30s %s\n", "-s --sort", "Sort the list");
-    printf("%-30s %s\n", "-t --type (asc/desc/A/D)", "Select the sorting mode (asc by default)");
+    printf("%-30s %s\n", "-t --type= (asc/desc/A/D)", "Select the sorting mode (asc by default)");
     printf("%-30s %s\n", "-o --out= data.csv", "Output to a file (stdout by default)");
-    printf("%-30s %s\n", "-i --in= data.csv", "Input from file (stdin by default)");
-    printf("%-30s %s\n", "-p --print", "Output in the form of a table");
+    printf("%-30s %s\n", "-i --in= data.csv", "Input from a file (stdin by default)");
+    printf("%-30s %s\n", "-p --print", "Output in the form of a fixed-width table");
 }
 
 int parse_args(int argc, char* argv[], Args* args) {
@@ -106,7 +106,7 @@ int parse_args(int argc, char* argv[], Args* args) {
             fprintf(stderr, "INVALID FLAG\n");
             return 0;
             }
-            args->num = atoi(value);
+            args->num = strtol(value, NULL, 10);
             if (args->num < 0) {
                 fprintf(stderr, "INCORRECT N\n");
                 args->generation = false;

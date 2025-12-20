@@ -30,7 +30,7 @@ List* initialize_list();
 u_int get_size(List* list);
 
 /**
- * @brief Getting the first element by index
+ * @brief Getting the node by index
  * 
  * @param list 
  * @param index 
