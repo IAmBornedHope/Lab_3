@@ -2,7 +2,7 @@
 #include "article.h"
 
 /**
- * @brief Функция для сравнения двух статей. Возвращает -1, 0 или 1
+ * @brief Function for comparing two articles. Returns -1, 0, or 1
  * 
  * @param a 
  * @param b 

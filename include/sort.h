@@ -5,26 +5,17 @@
 #include <stdlib.h>
 
 /**
- * @brief Пузырьковая сортировка двусвязного списка с использованием функции-компаратора
+ * @brief Bubble sort of a double linked list using a comparator function
  *
  * 
  * @param list 
  * @param compare_articles 
- * @param direction 1 - возрастание, 0 - убывание
+ * @param direction 1 - increasing, 0 - decreasing
  */
 void bubble_sort(List* list, int (*compare_articles)(const Article*, const Article*), bool direction);
 
 /**
- * @brief Разделение двусвязного списка на две части
- * 
- * @param start 
- * @param middle 
- * @return Node* 
- */
-Node* split_list(Node* start, u_int middle);
-
-/**
- * @brief Рекурсивная часть сортировки слиянием
+ * @brief The recursive part of merge sort
  * 
  * @param head 
  * @param len 
@@ -35,7 +26,7 @@ Node* split_list(Node* start, u_int middle);
 
 Node* merge_sort_recursion(Node* head, u_int len, int (*compare_articles)(const Article*, const Article*), bool direction);
 /**
- * @brief Слияние двух списков
+ * @brief Merging two lists
  * 
  * @param left 
  * @param right 
@@ -45,10 +36,10 @@ Node* merge_sort_recursion(Node* head, u_int len, int (*compare_articles)(const 
  */
 Node* merge_lists(Node* left, Node* right, int (*compare_articles)(const Article*, const Article*), bool direction);
 /**
- * @brief Сортировка двусвязного списка слиянием с использованием функции-компаратора
+ * @brief Sorting a double linked list by merging using a comparator function
  * 
  * @param list 
  * @param compare_articles 
- * @param direction 1 - возрастание, 0 - убывание
+ * @param direction 1 - increasing, 0 - decreasing
  */
 void merge_sort(List* list, int (*compare_articles)(const Article*, const Article*), bool direction);

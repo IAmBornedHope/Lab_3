@@ -15,14 +15,14 @@ typedef struct {
 } List;
 
 /**
- * @brief Инициализация двусвязного списка
+ * @brief Initializing a double linked list
  * 
  * @return List* 
  */
 List* initialize_list();
 
 /**
- * @brief Получение размеров двусвязного списка
+ * @brief Getting size of a double linked list
  * 
  * @param list 
  * @return u_int 
@@ -30,7 +30,7 @@ List* initialize_list();
 u_int get_size(List* list);
 
 /**
- * @brief Получение первого элемента по индексу
+ * @brief Getting the first element by index
  * 
  * @param list 
  * @param index 
@@ -38,14 +38,14 @@ u_int get_size(List* list);
  */
 Node* get_at(List* list, u_int index);
 /**
- * @brief Получение первого узла списка
+ * @brief Getting the first node of the list
  * 
  * @param list 
  * @return Node* 
  */
 Node* get_beginning(List* list);
 /**
- * @brief Разделение списка на две части по индексу
+ * @brief Splitting a list into two parts by index
  * 
  * @param start 
  * @param middle 
@@ -53,14 +53,14 @@ Node* get_beginning(List* list);
  */
 Node* split_list(Node* start, u_int middle);
 /**
- * @brief Получение последнего узла списка
+ * @brief Getting the last node of the list
  * 
  * @param list 
  * @return Node* 
  */
 Node* get_end(List* list);
 /**
- * @brief Получение следующего узла от указателя
+ * @brief Getting the next node from the pointer
  * 
  * @param list 
  * @param node 
@@ -68,7 +68,7 @@ Node* get_end(List* list);
  */
 Node* get_next(List* list, Node* node);
 /**
- * @brief Получение предыдущего узла от указателя
+ * @brief Getting the previous node from the pointer
  * 
  * @param list 
  * @param node 
@@ -76,7 +76,7 @@ Node* get_next(List* list, Node* node);
  */
 Node* get_prev(List* list, Node* node);
 /**
- * @brief Получение статьи из узла по индексу узла
+ * @brief Getting an article from a node by node index
  * 
  * @param list 
  * @param index 
@@ -84,21 +84,21 @@ Node* get_prev(List* list, Node* node);
  */
 Article* get_data(List* list, u_int index);
 /**
- * @brief Добавление узла в начало списка
+ * @brief Adding a node to the top of the list
  * 
  * @param list 
  * @param data 
  */
 void push_start(List* list, Article* data);
 /**
- * @brief Добавление узла в конец списка
+ * @brief Adding a node to the end of the list
  * 
  * @param list 
  * @param data 
  */
 void push_end(List* list, Article* data);
 /**
- * @brief Добавление элемента в произвольное место списка по индексу
+ * @brief Adding an element to an arbitrary position in the list by index
  * 
  * @param list 
  * @param data 
@@ -106,19 +106,19 @@ void push_end(List* list, Article* data);
  */
 void push_by_index(List* list, Article* data, u_int index);
 /**
- * @brief Удаление первого элемента списка
+ * @brief Deleting the first item in the list
  * 
  * @param list 
  */
 void pop_start(List* list);
 /**
- * @brief Удаление последнего элемента списка
+ * @brief Deleting the last item in the list
  * 
  * @param list 
  */
 void pop_end(List* list);
 /**
- * @brief Удаление произвольного элемента списка по индексу
+ * @brief Deleting any item in the list by index
  * 
  * @param list 
  * @param index 
@@ -129,7 +129,7 @@ u_int max(u_int a, u_int b);
 u_int min(u_int a, u_int b);
 
 /**
- * @brief Обмен двух соседних элементов двусвязного списка
+ * @brief Exchanging two adjacent elements in a double linked list
  * 
  * @param list 
  * @param node1 
@@ -137,7 +137,7 @@ u_int min(u_int a, u_int b);
  */
 void swap_near(List* list, Node* node1, Node* node2);
 /**
- * @brief Обмен двух элементов двусвязного списка в общем случае
+ * @brief Exchanging two elements of a double linked list in general
  * 
  * @param list 
  * @param index1 
@@ -145,7 +145,7 @@ void swap_near(List* list, Node* node1, Node* node2);
  */
 void swap(List* list, u_int index1, u_int index2);
 /**
- * @brief Преобразование массива в структуру
+ * @brief Converting an array to a structure
  * 
  * @param array 
  * @param size 
@@ -153,19 +153,19 @@ void swap(List* list, u_int index1, u_int index2);
  */
 List* array_to_list(Article* array, u_int size);
 /**
- * @brief Преобразование структуры в массив
+ * @brief Converting a structure to an array
  * 
  * @param list 
  * @return Article* 
  */
 Article* list_to_array(List* list);
 /**
- * @brief Удаление всех элементов из списка
+ * @brief Removing all items from the list
  * 
  */
 void clear_list(List* list);
 /**
- * @brief Очистка выделенной под список памяти
+ * @brief Clearing the memory allocated for the list
  * 
  * @param list 
  */

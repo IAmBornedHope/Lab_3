@@ -1,13 +1,13 @@
 #include "args.h"
 
 void print_help() {
-    puts("-h --help Показать меню информации");
-    puts("-g --generate=N Сгенерировать N случайных научных статей");
-    puts("-s --sort Отсортировать список");
-    puts("-t --type (asc/desc/A/D) Выбор режима сортировки ");
-    puts("-o --out= data.csv Вывод в файл/поток stdout");
-    puts("-i --in= data.csv Ввод из файла/потока stdin");
-    puts("-p --print Вывод в виде таблицы");
+    printf("%-30s %s\n", "-h --help", "Show this menu");
+    printf("%-30s %s\n", "-g --generate=N", "Generate N random scientific articles");
+    printf("%-30s %s\n", "-s --sort", "Sort the list");
+    printf("%-30s %s\n", "-t --type (asc/desc/A/D)", "Select the sorting mode (asc by default)");
+    printf("%-30s %s\n", "-o --out= data.csv", "Output to a file (stdout by default)");
+    printf("%-30s %s\n", "-i --in= data.csv", "Input from file (stdin by default)");
+    printf("%-30s %s\n", "-p --print", "Output in the form of a table");
 }
 
 int parse_args(int argc, char* argv[], Args* args) {

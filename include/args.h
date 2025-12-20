@@ -19,13 +19,13 @@ typedef struct _Args{
 } Args;
 
 /**
- * @brief Вывод справки для пользователя
+ * @brief Output of help menu for the user
  * 
  */
 
 void print_help();
 /**
- * @brief Обработка аргументов командной строки
+ * @brief Processing command line arguments
  * 
  * @param argc 
  * @param argv 

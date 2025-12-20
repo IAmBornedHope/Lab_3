@@ -3,10 +3,19 @@
 #include <stdio.h>
 #include "list.h"
 
+
+
+
 /**
- * @brief Функция для генерации случайных научных статей
+ * @brief A function for generating one random article
+ * 
+ * @return Article 
+ */
+Article generate_article();
+/**
+ * @brief Function for generating a list of random scientific articles
  * 
  * @param count 
  * @return List* 
  */
-List* generate_articles(u_int count);
+List* generate_list(u_int count);

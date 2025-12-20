@@ -53,7 +53,7 @@ void print_table(List* list, FILE* output_file) {
 
 List* input_csv(char* input_file) {
     FILE* source = NULL;
-    char buf[1024];
+    char buf[4096];
     List* list = initialize_list();
     if (!list) return NULL;
 
@@ -61,10 +61,11 @@ List* input_csv(char* input_file) {
     if (input_file) {
         source = fopen(input_file, "r");
         if (!source) {
-            puts("Не удалось открыть файл");
+            puts("Couldn't open the file");
             free_list(list);
             return NULL;
         }
+        fgets(buf, sizeof(buf), source);
     }
     else {
         source = stdin;
@@ -72,22 +73,34 @@ List* input_csv(char* input_file) {
 
     while (fgets(buf, sizeof(buf), source)) {
         Article note;
-        u_int rinc_digit;
+        char rinc_word[4];
 
         if (buf[0] == '\n') break;
          
-        int result = sscanf(buf, "%255[^,],%127[^,],%24[^,],%255[^,],%u,%u,%u,%u,%u",
+        int result = sscanf(buf, "%255[^,],%127[^,],%24[^,],%255[^,],%u,%u,%3[^,],%u,%u",
             note.article_name, note.author_surname, note.initials, note.journal_name,
-            &note.year, &note.book, &rinc_digit, &note.pages, &note.citations);
+            &note.year, &note.book, rinc_word, &note.pages, &note.citations);
 
+        if (result != 9) {
+            puts("An invalid number of fields. This line will be skipped.");
+            continue;
+        }
         if (note.year < 1000 || note.year > 2025) {
-            puts("Введен недопустимый год. Данная строка будет пропущена.");
+            puts("An invalid year has been entered. This line will be skipped.");
             continue;
         }
 
 
-        if (rinc_digit == 0) note.rinc = 0;
-        else note.rinc = 1;
+        if (strcmp(rinc_word, "NO") == 0) {
+            note.rinc = 0;
+        }
+        else if (strcmp(rinc_word, "YES") == 0) {
+            note.rinc = 1;
+        }
+        else {
+            puts("An invalid Boolean value (not \"YES\" or \"NO\"). This line will be skipped.");
+            continue;
+        }
 
 
         push_end(list, &note);

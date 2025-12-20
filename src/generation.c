@@ -42,33 +42,34 @@ static const char* journals[] = {
     "AI Journal"
 };
 
-List* generate_articles(u_int count) {
-    srand((u_int)time(NULL));
-    List* list = initialize_list();
-    if (!list) return NULL;
+Article generate_article() {
+    Article note;
 
     u_int names_count = sizeof(article_names) / sizeof(article_names[0]);
     u_int surnames_count = sizeof(author_surnames) / sizeof(author_surnames[0]);
     u_int initials_count = sizeof(initials_list) / sizeof(initials_list[0]);
     u_int journals_count = sizeof(journals) / sizeof(journals[0]);
 
+    snprintf(note.article_name, sizeof(note.article_name), "%s", article_names[rand() % names_count]);
+    snprintf(note.author_surname, sizeof(note.author_surname), "%s", author_surnames[rand() % surnames_count]);
+    snprintf(note.initials, sizeof(note.initials), "%s", initials_list[rand() % initials_count]);
+    snprintf(note.journal_name, sizeof(note.journal_name), "%s", journals[rand() % journals_count]);
+
+    note.year = 1900 + rand() % 126;
+    note.book = 1 + rand() % 20;
+    note.rinc = rand() % 2;
+    note.pages = 1 + rand() % 500;
+    note.citations = 1 + rand() % 100;
+
+    return note;
+}
+List* generate_list(u_int count) {
+    srand((u_int)time(NULL));
+    List* list = initialize_list();
+    if (!list) return NULL;
     for (u_int i = 0; i < count; i++) {
-        Article note;
-
-        snprintf(note.article_name, sizeof(note.article_name), "%s", article_names[rand() % names_count]);
-        snprintf(note.author_surname, sizeof(note.author_surname), "%s", author_surnames[rand() % surnames_count]);
-        snprintf(note.initials, sizeof(note.initials), "%s", initials_list[rand() % initials_count]);
-        snprintf(note.journal_name, sizeof(note.journal_name), "%s", journals[rand() % journals_count]);
-
-        note.year = 1900 + rand() % 126;
-        note.book = 1 + rand() % 20;
-        note.rinc = rand() % 2;
-        note.pages = 1 + rand() % 500;
-        note.citations = 1 + rand() % 100;
-
+        Article note = generate_article();
         push_end(list, &note);
     }
     return list;
-
-        
 }

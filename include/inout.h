@@ -5,21 +5,21 @@
 #include <stdio.h>
 
 /**
- * @brief Функция для вывода списка в CSV-формате
+ * @brief Function for displaying a list in CSV format
  * 
  * @param list 
  * @param output_file 
  */
 void print_csv(List* list, FILE* output_file);
 /**
- * @brief Функция для вывода списка в формате таблицы с фиксированной шириной
+ * @brief Function for displaying a list in a fixed-width table format
  * 
  * @param list 
  * @param output_file 
  */
 void print_table(List* list, FILE* output_file);
 /**
- * @brief Ввод научных публикаций в CSV формате из указанного файла или с потока ввода
+ * @brief Input of scientific publications in CSV format from a specified file or from an input stream
  * 
  * @param input_file 
  * @return List* 
