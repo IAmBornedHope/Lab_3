@@ -51,21 +51,21 @@ int main(int argc, char* argv[]) {
         else list = input_csv(NULL);
         start = clock();
         if(strcmp(args->flag, "desc") == 0 || strcmp(args->flag, "D") == 0) {
-            //bubble_sort(list, compare_articles, 0);
-            merge_sort(list, compare_articles, 0);
+            bubble_sort(list, compare_articles, 0);
+            //merge_sort(list, compare_articles, 0);
         }
         else{
-            //bubble_sort(list, compare_articles, 1);
-            merge_sort(list, compare_articles, 1);
+            bubble_sort(list, compare_articles, 1);
+            //merge_sort(list, compare_articles, 1);
         }
         end = clock();
         time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
         timer = fopen("TIMER.txt", "a");
-        //fprintf(timer, "%.3f\n", time_used);
+        fprintf(timer, "%.3f\n", time_used);
         fclose(timer);
 
         print_csv(list, out_stream);
-        printf("Время работы: %.3f с.", time_used);
+        printf("Runtime: %.3f с.", time_used);
     }
 
     else if (args->print) {
